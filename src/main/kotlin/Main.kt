@@ -1,4 +1,4 @@
-import app.MainActivity
+import app.MainActivityConsole
 import data.dao.UserDAO
 import data.database.DatasourceFactory
 import services.UserDAOService
@@ -10,7 +10,7 @@ fun main() {
     val console = Console()
 
     try {
-        DatasourceFactory.init()
+        DatasourceFactory.init(DatasourceFactory.Mode.DEBUG)
     } catch (e: Exception) {
         console.displayError("Database connection error", e.message ?: "Unknown error")
         exitProcess(45)
@@ -21,7 +21,7 @@ fun main() {
     val userService = UserDAOService(userDao)
 
 
-    val app = MainActivity(userService,console)
+    val app = MainActivityConsole(userService,console)
     app.menu()
 
 }

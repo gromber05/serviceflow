@@ -22,12 +22,15 @@ class Console: IOutput {
         val console = System.console()
         return if (console != null) {
             val passwordChars = console.readPassword(prompt)
-            String(passwordChars)
+            passwordChars?.let { String(it) }
         } else {
-            displayError(Errors.ERROR_PASSWORD.toString(), Errors.ERROR_PASSWORD.description)
-            null
+            display("⚠️ Console not available. The password will not be hidden.")
+            display(prompt)
+            readlnOrNull()
         }
     }
+
+
 
 
 
